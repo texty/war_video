@@ -7,124 +7,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Російські війська в Україні</title>
 
-    <link rel='stylesheet' href='css/styles.css'/>
+    <link rel='stylesheet' href='css/styles.css' />
 </head>
 
-<body>   
+<body>
     <header>
         <h1>Російські війська в Україні</h1>
-    </header> 
+        <div id="calendar-wrapper"></div> 
+
+    </header>
     <main>
-       
-        <div class='video-wrapper'>  
-            
-            <div class='video-item'>               
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/IMG_0528.MP4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/IMG_6842.MP4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-               
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/Бурят.MP4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-               
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/IMG_8926.mp4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-                
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/video_2022-03-01_09-29-07.mp4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>                
-            </div>
-
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/байрактар.mp4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-               
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/полон 10.00.mp4" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-               
-            </div>
-
-            <div class='video-item'>
-                <div class='description'>
-                    <p class='tip'>
-                        <span>Буча</span> | <span>26.02.2022</span>
-                    </p>
-                </div>
-                <video controls>
-                    <source src="video/ТРО.MOV" type="video/mp4">                    
-                    Your browser does not support the video tag.
-                </video>
-                
-            </div>          
-
-
+        <p><span id='selected-date'>Оберіть дату: </span></span><span id="show_all_video"></span></p>
+        <div id='video-wrapper'>
+           
 
         </div>
+      
+
+       <!--    <label for="date-picker">Оберіть день</label>
+      <input type="date" id="date-picker" name="date-picker" value="2022-02-24" min="2022-02-24" max=""> -->
+
+      
     </main>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src='lib/d3v5.min.js'></script>
+<!-- <script src="js/calendar.js"></script>
+ --><script>
+
+    var width = 200,
+        height = 136,
+        cellSize = 17;
+
+    var formatPercent = d3.format(".1%");
+
+    var color = d3.scaleQuantize()
+        .domain([1, 10])
+        .range(["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"]);
+
+    var svg = d3.select("#calendar-wrapper")
+        .selectAll("svg")
+        .data(d3.range(2022, 2023))
+        .enter().append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+     //.attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+     .attr("transform", "translate(" + '-50' + "," + 0 + ")");
+
+    svg.append("text")
+        .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("text-anchor", "middle")
+        .text(function (d) { return d; });
+
+    var rect = svg.append("g")
+        .attr("fill", "none")
+        .selectAll("rect")
+        .data(function (d) { return d3.timeDays(new Date(d, 1, 23), new Date()); })
+        .enter()
+        .append("rect")
+        .attr('class', 'day')
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("x", function (d) { return d3.timeWeek.count(d3.timeYear(d), d) * cellSize; })
+        .attr("y", function (d) { return d.getDay() * cellSize; })
+        .attr("stroke", "#333")
+        .style("opacity", "0.5")
+        .on("mouseenter", function(){
+                d3.selectAll('.day').style("opacity", 0.5)
+                d3.select(this).style("opacity", 1)
+            })
+        
+        .datum(d3.timeFormat("%Y-%m-%d"));
+
+    svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "white")
+        .selectAll("path")
+        .data(function (d) { return d3.timeMonths(new Date(d, 0, 31), new Date()); })
+        .enter().append("path")
+        .attr("d", pathMonth);
+
+   /*  var todayStr = d3.timeFormat("%Y-%m-%d")(new Date())
+
+    d3.select('#date-picker')
+        .attr("max", todayStr) */
+
+    d3.select('#show_all_video')
+            .on('click', function(){               
+                d3.selectAll('.video-item').style("display", 'block');
+                d3.select('#selected-date').html('Оберіть дату. щоб відфільтрувати відео');
+                d3.select('#show_all_video').html('');
+    })
+
+    d3.csv("data/data.csv").then(function (video) {
+
+        video.forEach(function (d) {
+            d.parced_date = d3.timeParse('%Y-%m-%d')(d.date)
+        })
+
+        var items = d3.select("#video-wrapper")
+            .selectAll(".video-item")
+            .data(video)
+            .enter()
+            .append("div")
+            .attr("class", "video-item");
+
+        var decription = items.append('div')
+            .attr('class', 'description')
+            .append('p')
+            .attr('class', 'tip')
+            .html(function (d) {
+                return "<span>" + d.place + "</span> | <span>" + d.date + "</span>"
+            })
+
+        var vid = items
+            .append("video")
+            .attr('controls', "")
+            .append('source')
+            .attr('src', function (d) { return d.url })
+            .attr('type', 'video/mp4')
+
+        var data = d3.nest()
+            .key(function (d) { return d.date; })           
+            .entries(video);
+
+        rect
+            .on('click', function(d){
+                vid.each(function(t){                    
+                    d3.select(this.parentNode.parentNode)
+                        .style("display", t.date === d ? "block" : "none")
+                })
+                d3.select("#selected-date").text(d + " | ")
+                d3.select('#show_all_video').html('&times; Показати всі ')
+            })
+            .attr("fill", function (d) { 
+                let el = data.filter(function(t){ return t.key === d})
+                return el[0] ? color(el[0].values.length) : 'lightgrey'
+            })
+            .append("title")
+            .text(function (d) { return d + ": " + formatPercent(data[d]); });   
+            
+            
+       
+
+           
+
+    })
+
+    
+
+    function pathMonth(t0) {
+        var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
+            d0 = t0.getDay(), w0 = d3.timeWeek.count(d3.timeYear(t0), t0),
+            d1 = t1.getDay(), w1 = d3.timeWeek.count(d3.timeYear(t1), t1);
+        return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize
+            + "H" + w0 * cellSize + "V" + 7 * cellSize
+            + "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize
+            + "H" + (w1 + 1) * cellSize + "V" + 0
+            + "H" + (w0 + 1) * cellSize + "Z";
+    }
+</script>
 
 </html>
