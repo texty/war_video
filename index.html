@@ -12,15 +12,20 @@
 
 <body>
     <header>
-        <h1>Російські війська в Україні</h1>
-        <div id="calendar-wrapper"></div> 
+        <h1>Російські війська в Україні.Хронологія</h1>
+        
 
     </header>
     <main>
-        <p><span id='selected-date'>Оберіть дату: </span></span><span id="show_all_video"></span></p>
+        
+      
         <div id='video-wrapper'>
-           
-
+            <div>
+                <span id="show_all_video">Ви бачите всі відео</span>
+                <span id='selected-date'>Обреріть день в календарі: </span>                
+                <div id="calendar-wrapper"></div> 
+               
+            </div>
         </div>
       
 
@@ -30,21 +35,30 @@
       
     </main>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
 
 <script src='lib/d3v5.min.js'></script>
+<script src="lib/popper.min.js"></script>
+<script src="lib/tippy-bundle.umd.js"></script>
 <!-- <script src="js/calendar.js"></script>
  --><script>
+	const month_list = ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'];
+    const month = d3.timeMonths(new Date("2021-12-31"), new Date());
+    var month_data = [];
+    for(var i = 0; i < month.length; i++){
+        console.log(month[i].getMonth())
+        month_data.push(month_list[month[i].getMonth()])
+    }
 
     var width = 200,
         height = 136,
-        cellSize = 17;
+        cellSize = 14;
 
     var formatPercent = d3.format(".1%");
 
     var color = d3.scaleQuantize()
-        .domain([1, 10])
-        .range(["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"]);
+        .domain([1, 3])
+        .range(['#e7d7d3','#efbcaf','#f2a18b', '#f18569', '#ed6746' ]);
 
     var svg = d3.select("#calendar-wrapper")
         .selectAll("svg")
@@ -52,21 +66,23 @@
         .enter().append("svg")
         .attr("width", width)
         .attr("height", height)
+
+    var svg_g = svg    
         .append("g")
      //.attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
      .attr("transform", "translate(" + '-50' + "," + 0 + ")");
 
-    svg.append("text")
+     svg_g.append("text")
         .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .attr("text-anchor", "middle")
         .text(function (d) { return d; });
 
-    var rect = svg.append("g")
+    var rect = svg_g.append("g")
         .attr("fill", "none")
         .selectAll("rect")
-        .data(function (d) { return d3.timeDays(new Date(d, 1, 23), new Date()); })
+        .data(function (d) { return d3.timeDays(new Date(d, 1, 24), new Date()); })
         .enter()
         .append("rect")
         .attr('class', 'day')
@@ -74,22 +90,50 @@
         .attr("height", cellSize)
         .attr("x", function (d) { return d3.timeWeek.count(d3.timeYear(d), d) * cellSize; })
         .attr("y", function (d) { return d.getDay() * cellSize; })
-        .attr("stroke", "#333")
-        .style("opacity", "0.5")
+        .attr("stroke", "white")
+        .style("opacity", "0.9")
         .on("mouseenter", function(){
-                d3.selectAll('.day').style("opacity", 0.5)
+                d3.selectAll('.day').style("opacity", 0.9)
                 d3.select(this).style("opacity", 1)
             })
         
         .datum(d3.timeFormat("%Y-%m-%d"));
 
-    svg.append("g")
+/*     svg_g.append("g")
         .attr("fill", "none")
-        .attr("stroke", "white")
+        .attr("stroke", "#333")
+        .selectAll("path")
+        .data(function (d) { return d3.timeMonths(new Date(d, 0, 31), new Date()); })
+        .enter().append("path")
+        .attr("d", pathMonth); */
+
+    svg_g.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#333")
+        .attr("stroke-width", "2px")
         .selectAll("path")
         .data(function (d) { return d3.timeMonths(new Date(d, 0, 31), new Date()); })
         .enter().append("path")
         .attr("d", pathMonth);
+        
+        
+    var legend = svg
+        .append("g")    
+        .attr("transform", "translate(" + '-50' + "," + 0 + ")")    
+        .selectAll(".legend")
+	    .data(month_data)
+	    .enter()
+        .append('g')	
+        .attr("class", "legend")    
+		.attr("transform", function(d, i) { return "translate(" + (((cellSize*4.3)*i)+(width/100)) + ","+ (height-20) +")"; })
+        .append("text")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text(function(d){ return d})
+        .style('font-size', '14px')
+        .style('letter-spacing', '1px');
+
+    
 
    /*  var todayStr = d3.timeFormat("%Y-%m-%d")(new Date())
 
@@ -99,8 +143,9 @@
     d3.select('#show_all_video')
             .on('click', function(){               
                 d3.selectAll('.video-item').style("display", 'block');
-                d3.select('#selected-date').html('Оберіть дату. щоб відфільтрувати відео');
-                d3.select('#show_all_video').html('');
+                d3.select('#selected-date').html('Обреріть день в календарі:');
+                d3.select('#show_all_video').html('Показано всі відео');
+                d3.selectAll('.day').attr("stroke", "white");  
     })
 
     d3.csv("data/data.csv").then(function (video) {
@@ -136,15 +181,22 @@
             .entries(video);
 
         rect
-            .on('click', function(d){
+            .on('click', function(d){  
+                d3.selectAll('.day').attr("stroke", "white")  
+                d3.select(this).attr("stroke", "black").attr("stroke-width","2px").raise();
                 vid.each(function(t){                    
                     d3.select(this.parentNode.parentNode)
                         .style("display", t.date === d ? "block" : "none")
                 })
-                d3.select("#selected-date").text(d + " | ")
-                d3.select('#show_all_video').html('&times; Показати всі ')
+                d3.select("#selected-date").text('Обрана дата: '+ d)
+                d3.select('#show_all_video').html('Прибрати фільтр &times; ')
             })
+            .attr('data-tippy-content', function(d){ return d })
             .attr("fill", function (d) { 
+                let el = data.filter(function(t){ return t.key === d})
+                return el[0] ? color(el[0].values.length) : 'lightgrey'
+            })
+            .attr("data-fill", function (d) { 
                 let el = data.filter(function(t){ return t.key === d})
                 return el[0] ? color(el[0].values.length) : 'lightgrey'
             })
@@ -152,7 +204,12 @@
             .text(function (d) { return d + ": " + formatPercent(data[d]); });   
             
             
-       
+            tippy('.day', {                 
+                allowHTML: true, 
+                maxWidth: 350, 
+                placement: 'bottom'               
+            });
+
 
            
 

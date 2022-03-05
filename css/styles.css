@@ -1,15 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto+Slab:wght@300;400;500;600&display=swap");
 body {
-  font-family: sans-serif;
+  font-family: 'Inconsolata', monospace;
   margin: 0;
   padding: 0;
-  background-color: #040404;
+  /* background-color: #040404;
+    color: white;*/
 }
 
 header {
   max-width: 1400px;
   width: 100%;
   margin: auto;
-  min-height: 30vh;
+  min-height: 20vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -34,10 +36,6 @@ main {
   display: block;
   margin: 0 auto 100px auto;
   padding: 0;
-}
-
-p {
-  color: white;
 }
 
 .tip {
@@ -92,6 +90,10 @@ video {
   }
 }
 
+.active {
+  fill: green !important;
+}
+
 #date-picker {
   margin-bottom: 50px;
 }
@@ -100,5 +102,25 @@ video {
   color: #ed6746;
   margin-left: 10px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#calendar-wrapper {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.day {
+  cursor: pointer;
+  outline: none;
+}
+
+#selected-date, #show_all_video {
+  display: block;
+  text-align: center;
+  margin: 10px 0;
 }
 /*# sourceMappingURL=styles.css.map */
