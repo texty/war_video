@@ -7,26 +7,32 @@ body {
     font-family: 'Roboto Mono', monospace;
     margin:0;
     padding: 0;
-    /* background-color: #040404;
-    color: white;*/
+    background-color:#e3e3e3;
+    /*color: white;*/
 } 
 
-header {
-    padding: 20px;
-    max-width: 1400px;
+header {       
     width: 100%;
-    margin:auto;
+    margin-bottom: 50px;
     min-height: 20vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: black;
+
+    div {
+        max-width: 1400px;
+        width:90%;
+        margin: auto;
+
+    }
 
 
     h1 {
         margin: 0;
         color: $red;
         text-align: left;
-        font-size: 60px;
+        font-size: 50px;
     }
 }
 
