@@ -30,11 +30,14 @@
     </main>
 </body>
 
-<script src='lib/d3v5.min.js'></script>
+ <!-- <script src='lib/d3v5.min.js'></script> -->
+
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js'></script>
 <script src="lib/popper.min.js"></script>
 <script src="lib/tippy-bundle.umd.js"></script>
 
 <script>
+    const ROOT = 'https://texty.org.ua/d/2022/war_video/'
 	const month_list = ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'];
     const month = d3.timeMonths(new Date("2021-12-31"), new Date());
     var month_data = [];
@@ -126,10 +129,18 @@
                 d3.selectAll('.day').attr("stroke", "white");  
     })
 
-    d3.csv("data/data.csv").then(function (video) {
+    function d3_jsonl(url) {
+        return d3.text(url).then(function (text) {
+            return text.trim().split('\n').map(JSON.parse);
+        });
+        }
 
+
+    d3_jsonl("data/media.jsonl").then(function (video) {
         video.forEach(function (d) {
-            d.parced_date = d3.timeParse('%Y-%m-%d')(d.date)
+            d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.msg_date)
+            d.date = (d.parced_date.getFullYear()).toString() +"-"+ ("0" + (d.parced_date.getMonth() + 1)).slice(-2) + "-"+ ("0" + d.parced_date.getDay()).slice(-2)
+           
         })
 
         var items = d3.select("#video-wrapper")
@@ -144,19 +155,21 @@
             .append('p')
             .attr('class', 'tip')
             .html(function (d) {
-                return "<span>" + d.place + "</span> | <span>" + d.date + "</span>"
+                return "<span>"+d.source_title + "</span> <br> <span>" + d.date + "</span>"
             })
 
         var vid = items
             .append("video")
             .attr('controls', "")
             .append('source')
-            .attr('src', function (d) { return d.url })
+            .attr('src', function (d) { return ROOT + d.file_path })
             .attr('type', 'video/mp4')
 
         var data = d3.nest()
             .key(function (d) { return d.date; })           
             .entries(video);
+
+        console.log(data)
 
         rect
             .on('click', function(d){  
@@ -171,13 +184,14 @@
             })
             .attr('data-tippy-content', function(d){ return d })
             .attr("fill", function (d) { 
-                let el = data.filter(function(t){ return t.key === d})
+                console.log(d);
+                let el = data.filter(function(t){ return t.key === d })
                 return el[0] ? color(el[0].values.length) : 'lightgrey'
             })
             .attr("data-fill", function (d) { 
                 let el = data.filter(function(t){ return t.key === d})
                 return el[0] ? color(el[0].values.length) : 'lightgrey'
-            }); 
+            });   
             
             
             tippy('.day', {                 
