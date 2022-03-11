@@ -11,8 +11,11 @@
 </head>
 
 <body>
+   
     <header>
+        
         <div>
+            <img style='width:150px; margin: 10px 0 50px' src='white_logo.svg'/>
         <h1>Російські війська в Україні.<br> <span style="color:white;">Хронологія</span></h1>
     </div>
     </header>
@@ -30,9 +33,7 @@
     </main>
 </body>
 
- <!-- <script src='lib/d3v5.min.js'></script> -->
-
- <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js'></script>
+<script src='lib/d3v5.min.js'></script> 
 <script src="lib/popper.min.js"></script>
 <script src="lib/tippy-bundle.umd.js"></script>
 
@@ -137,11 +138,15 @@
 
 
     d3_jsonl("data/media.jsonl").then(function (video) {
+
         video.forEach(function (d) {
             d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.msg_date)
             d.date = (d.parced_date.getFullYear()).toString() +"-"+ ("0" + (d.parced_date.getMonth() + 1)).slice(-2) + "-"+ ("0" + d.parced_date.getDay()).slice(-2)
            
         })
+
+        console.log(video);
+
 
         var items = d3.select("#video-wrapper")
             .selectAll(".video-item")
@@ -159,7 +164,9 @@
             })
 
         var vid = items
-            .append("video")
+            .append("video")            
+            .attr("poster", function(d){ return ROOT + d.thumb1_path})
+            .attr("preload", "none")
             .attr('controls', "")
             .append('source')
             .attr('src', function (d) { return ROOT + d.file_path })
@@ -184,7 +191,6 @@
             })
             .attr('data-tippy-content', function(d){ return d })
             .attr("fill", function (d) { 
-                console.log(d);
                 let el = data.filter(function(t){ return t.key === d })
                 return el[0] ? color(el[0].values.length) : 'lightgrey'
             })
