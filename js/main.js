@@ -104,7 +104,9 @@ d3_jsonl(ROOT + "data/media.jsonl").then(function (video) {
         d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
         d.date = date_format(d.parced_date)
        
-    });     
+    });    
+    
+    video = video.sort(function(a,b){ return a.parced_date  - b.parced_date})
 
 
     var items = d3.select("#video-wrapper")
