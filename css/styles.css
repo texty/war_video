@@ -49,7 +49,7 @@ main {
   display: grid;
   -ms-grid-columns: 1fr 4fr;
       grid-template-columns: 1fr 4fr;
-  margin: 0 auto 100px auto;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -95,7 +95,9 @@ main {
 
 .video-item {
   width: calc(100% - 10px);
-  height: calc(100% - 10px);
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   border: 1px solid #ed67465c;
   margin: 2px;
 }
