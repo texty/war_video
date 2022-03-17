@@ -251,6 +251,10 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
                 .attr('src', function (d) { return ROOT + d.file_path })
                 .attr('type', 'video/mp4')
             }
+
+        d3.select("#scroll-top").on('click', function(){
+            window.scrollTo(0, 0)
+        })
         
         
         tippy('.day', {                 
