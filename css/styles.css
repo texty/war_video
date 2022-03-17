@@ -127,21 +127,20 @@ video {
   margin-bottom: 50px;
 }
 
-#show_all_video {
+.show_all {
   color: #ed6746;
-  margin-left: 10px;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 600;
 }
 
-.calendar {
+.wrapper {
   width: 90%;
-  margin: auto;
+  margin: 30px auto;
   color: white;
 }
 
-#calendar-wrapper {
+#day-select {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -156,5 +155,21 @@ video {
 #selected-date, #show_all_video {
   display: block;
   margin: 10px 0;
+}
+
+select {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #333;
+  color: white;
+  display: block;
+  margin: 5px 0 50px;
+  padding: 5px;
+}
+
+.no-video {
+  grid-column: 1/-1;
+  display: none;
+  text-align: center;
+  margin: auto;
 }
 /*# sourceMappingURL=styles.css.map */

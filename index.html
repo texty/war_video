@@ -20,17 +20,39 @@
             </div>
 
             <!-- календар -->
-            <div class="calendar">           
-                <span id="show_all_video">Ви бачите всі відео</span>
-                <span id='selected-date'>Обреріть день: </span>
-                <div id="calendar-wrapper"></div>            
+            <div id="calendar-wrapper" class='wrapper'>           
+                <span id="show_all_video" class='show_all'>Дату не обрано</span>
+                <span id='selected-date'>оберіть день: </span>
+                <div id="day-select"></div>            
             </div>
+
+            <!-- категорія -->
+            <div id="category-wrapper" class='wrapper'>
+                <span id="show-all-categories" class='show_all'>Категорію не обрано</span>                
+                <select id='category-select'>
+                    <option value='null' disabled selected>оберіть категорію</option>
+                </select>
+            </div>
+
+             <!-- регіон -->
+            <div id="region-wrapper" class='wrapper'>
+                <span id="show-all-regions" class='show_all'>Регіон не обрано</span>
+                <select id='region-select'>
+                    <option value='null' disabled selected>оберіть регіон</option>
+                </select>
+            </div>
+
+           
+
+           
 
             <!-- фільтр категорій -->
         </header>
         
 
-        <div id='video-wrapper'></div>
+        <div id='video-wrapper'>
+            <p class="no-video">Відео за обраними параметрами не знайдено.</p>
+        </div>
     </main>
 </body>
 
