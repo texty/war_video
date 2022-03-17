@@ -96,21 +96,20 @@ video {
     margin-bottom: 50px;
 }
 
-#show_all_video {
-    color: $red;
-    margin-left: 10px;
+.show_all {
+    color: $red;   
     cursor: pointer;
     text-transform: uppercase;   
     font-weight: 600; 
 }
 
-.calendar {
+.wrapper {
     width:90%;
-    margin:auto;
+    margin:30px auto;
     color: white;
 }
 
-#calendar-wrapper {
+#day-select {
     width: max-content;
     margin: 0;   
 }
@@ -123,4 +122,20 @@ video {
 #selected-date, #show_all_video {
     display:block;
     margin: 10px 0;
+}
+
+select {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #333;
+    color: white;
+    display: block;
+    margin: 5px 0 50px;
+    padding: 5px;
+}
+
+.no-video {
+    grid-column: 1/-1;
+    display: none;
+    text-align: center;
+    margin: auto;
 }
