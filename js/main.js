@@ -6,6 +6,10 @@ var currentDate = null;
 var currentCategory = null;
 var currentRegion = null;
 
+var showAllDates = true;
+var showAllCategories = true;
+var showAllRegions = true;
+
 for(var i = 0; i < month.length; i++){
     month_data.push(month_list[month[i].getMonth()])
 }
@@ -151,6 +155,7 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
     rect
         .on('click', function(d){  
             currentDate = d;
+            showAllDates = false;
             updateVideo();
             d3.selectAll('.day').attr("stroke", "black")  
             d3.select(this).attr("stroke", "red").attr("stroke-width","2px").raise();
@@ -174,13 +179,17 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
             d3.select('#show_all_video').html('Дату не обрано');
             d3.selectAll('.day').attr("stroke", "black"); 
             currentDate = null;  
-            updateVideo();    
+            if(showAllDates === false){
+                showAshowAllDatesllCategories = true; 
+                updateVideo(); 
+            }             
         })  
 
 
         d3.select("#category-select").on("change", function(){
             let selected = d3.select(this).property("value");
             currentCategory = selected; 
+            showAllCategories = false;
             d3.select('#show-all-categories').html('Прибрати фільтр &times; ')
             updateVideo();          
         });
@@ -188,15 +197,19 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
         d3.select("#show-all-categories").on("click", function(){
             d3.select('#show-all-categories').html('Категорію не обрано');
             d3.select("#category-select").property('value', 'null');
-            currentCategory = null;
-            updateVideo();  
+            currentCategory = null;             
+            if(showAllCategories === false){
+                showAllCategories = true; 
+                updateVideo(); 
+            }
         })
 
 
         d3.select("#region-select").on("change", function(){
             let selected = d3.select(this).property("value");   
             d3.select('#show-all-regions').html('Прибрати фільтр &times;');
-            currentRegion = selected;             
+            currentRegion = selected;   
+            showAllRegions = false;          
             updateVideo();           
         }); 
 
@@ -204,7 +217,12 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
             d3.select('#show-all-regions').html('Регіон не обрано');
             d3.select("#region-select").property('value', 'null');
             currentRegion = null;
-            updateVideo();  
+            
+            if(showAllRegions === false){
+                showAllRegions = true; 
+                updateVideo(); 
+            }
+             
         })
 
         updateVideo();
@@ -239,10 +257,10 @@ d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
                 .append('p')
                 .attr('class', 'tip')
                 .html(function (d) {
-                    return "<span>"+ d.source_title.replace('|','/').split('/')[0] + "</span> <br> <span>" + d.date + "</span>"
+                    return "<span>"+ d.source_title.replace('|','/').split('/')[0] + "</span> <br> <span>" + d.date + "/ "+ d.attrs.location +"</span>"
                 })
 
-            var vid = items
+            items
                 .append("video")            
                 .attr("poster", function(d){ return ROOT + d.thumb1_path})
                 .attr("preload", "none")
