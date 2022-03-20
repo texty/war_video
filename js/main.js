@@ -1,4 +1,4 @@
-const ROOT = 'https://texty.org.ua/d/2022/war_video/'
+const ROOT = 'https://texty.org.ua/d/2022/'
 const month_list = ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'];
 const month = d3.timeMonths(new Date("2021-12-31"), new Date());
 var month_data = [];
@@ -96,7 +96,7 @@ function d3_jsonl(url) {
     }
 
 //load data
-d3_jsonl(ROOT + "/data/media.merged.jsonl").then(function (video) {
+d3_jsonl(ROOT + "war_video_data/media.merged.jsonl").then(function (video) {
 
     const date_format = d3.timeFormat("%Y-%m-%d"); 
     var categories_list = [];
