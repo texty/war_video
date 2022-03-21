@@ -45,6 +45,23 @@ header h1 {
   }
 }
 
+#socio-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.icon-wrapper {
+  margin-right: 10px;
+}
+
+.icon-wrapper img {
+  width: 30px;
+}
+
 main {
   width: 96%;
   display: -ms-grid;

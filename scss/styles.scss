@@ -38,6 +38,19 @@ header {
     }
 }
 
+#socio-icons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.icon-wrapper {
+    margin-right: 10px;
+img {
+    width: 30px;
+}
+}
+
+
 main {    
     width: 96%;
     display:grid;
