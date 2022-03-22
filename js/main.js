@@ -105,7 +105,6 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl").then(f
     video = video.filter(function(d){ return d.attrs !== null});
 
     video.forEach(function (d) {
-        console.log(d);
         d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
         d.date = date_format(d.parced_date);
         
@@ -298,3 +297,9 @@ function pathMonth(t0) {
         + "H" + (w1 + 1) * cellSize + "V" + 0
         + "H" + (w0 + 1) * cellSize + "Z";
 }
+
+d3.select('.button').on("click", function(){
+    d3.select(".methodology-wrapper")   
+    .classed("hidden", !d3.select(".methodology-wrapper").classed("hidden"))
+})
+

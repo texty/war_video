@@ -7,7 +7,10 @@ body {
 }
 
 header {
-  height: 100vh;
+  min-height: 100vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -33,14 +36,15 @@ header div.header-wrapper {
           align-items: center;
 }
 
-header h1 {
+h1 {
   color: #ed6746;
   text-align: left;
   font-size: 30px;
+  margin-left: 10px;
 }
 
 @media (max-width: 700px) {
-  header h1 {
+  h1 {
     margin: 0;
   }
 }
@@ -198,5 +202,72 @@ select {
   bottom: 20px;
   right: 20px;
   cursor: pointer;
+}
+
+.metodology {
+  grid-column: 1/-1;
+  width: 90%;
+  margin-left: 10px;
+}
+
+.metodology .button {
+  cursor: pointer;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  background-color: #ed6746a3;
+  color: white;
+  padding: 5px;
+}
+
+.metodology .button:hover {
+  background-color: #ed6746;
+}
+
+.metodology p {
+  font-size: 14px;
+}
+
+.hidden {
+  height: 0;
+  overflow: hidden;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+.credits {
+  width: 90%;
+  margin: auto;
+  font-size: 14px;
+  color: white;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .credits {
+    display: none;
+  }
+}
+
+.credits a {
+  color: white;
+}
+
+.credits a:hover {
+  color: #ed6746;
 }
 /*# sourceMappingURL=styles.css.map */

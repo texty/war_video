@@ -8,102 +8,132 @@
     <title>Втрати російських військ в Україні</title>
 
     <!-- OpenGraph Meta Tags -->
-    <meta property="fb:app_id" content="329250623807149"/>
-    <meta property="og:site_name" content="ТЕКСТИ.ORG.UA"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title"
-          content="Втрати російських військ в Україні. Хронологія"/>
-    <meta property="og:image" content="https://texty.org.ua/d/2022/war_video/img/cover.png"/>
+    <meta property="fb:app_id" content="329250623807149" />
+    <meta property="og:site_name" content="ТЕКСТИ.ORG.UA" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Втрати російських військ в Україні. Хронологія" />
+    <meta property="og:image" content="https://texty.org.ua/d/2022/war_video/img/cover.png" />
     <meta property="og:description"
-          content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією"/>
-    <meta property="og:url" content="https://texty.org.ua/d/2022/war_video/"/>
+        content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією" />
+    <meta property="og:url" content="https://texty.org.ua/d/2022/war_video/" />
 
 
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:site" content="@textyorgua"/>
-    <meta property="twitter:account_id" content="49572937"/>
-    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@textyorgua" />
+    <meta property="twitter:account_id" content="49572937" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://texty.org.ua/d/2022/war_video/">
-    <meta name="twitter:title"
-          content="Втрати російських військ в Україні. Хронологія"/>
+    <meta name="twitter:title" content="Втрати російських військ в Україні. Хронологія" />
     <meta name="twitter:description"
-          content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією."/>
-    <meta name="twitter:image:width" content="1200"/>
-    <meta name="twitter:image:height" content="630"/>
+        content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією." />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
 
 
     <!-- Other Meta Tags -->
     <meta name="title" content="Втрати російських військ в Україні. Хронологія">
-    <meta name="description" content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією">
+    <meta name="description"
+        content="Тексти зібрали та впорядкували воєнні відео з телеграм-каналів за датою, локацією та категорією">
 
 
 
     <link rel='stylesheet' href='css/styles.css' />
 </head>
 
-<body>   
+<body>
     <main>
         <header>
-            
+
             <div class="header-wrapper">
-                <img style='width:150px; margin: 10px 0 20px' src='white_logo.svg'/>  
+                <img style='width:150px; margin: 10px 0 20px' src='white_logo.svg' />
+
+           
                 <div id="socio-icons">
-                      <!--fb-->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2022/war_video/"
-                target="_blank" class="share-btn">
-                 <div class="icon-wrapper">                     
-                     <img id="fb" src="img/facebook.png"/>
-                 </div>
-             </a>
+                    <!--fb-->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2022/war_video/"
+                        target="_blank" class="share-btn">
+                        <div class="icon-wrapper">
+                            <img id="fb" src="img/facebook.png" />
+                        </div>
+                    </a>
 
-             <!--tw -->
-             <a href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2022/war_video/"
-                target="_blank" class="share-btn">
-                 <div class="icon-wrapper">                    
-                     <img id="tw" src="img/twitter.png"/>
-                 </div>
-             </a>
+                    <!--tw -->
+                    <a href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2022/war_video/"
+                        target="_blank" class="share-btn">
+                        <div class="icon-wrapper">
+                            <img id="tw" src="img/twitter.png" />
+                        </div>
+                    </a>
 
-                </div>               
-                <h1>Втрати російських військ в Україні. <span style="color:white;">Хронологія</span></h1>               
+                </div>
+
+                <h1 class='mobile-only'>Втрати російських військ в Україні. <span style="color:white">Хронологія</span></h1>
+
             </div>
 
+
             <!-- календар -->
-            <div id="calendar-wrapper" class='wrapper'>           
+            <div id="calendar-wrapper" class='wrapper'>
                 <span id="show_all_video" class='show_all'>Дату не обрано</span>
                 <span id='selected-date'>оберіть день: </span>
-                <div id="day-select"></div>            
+                <div id="day-select"></div>
             </div>
 
             <!-- категорія -->
             <div id="category-wrapper" class='wrapper'>
-                <span id="show-all-categories" class='show_all'>Категорію не обрано</span>                
+                <span id="show-all-categories" class='show_all'>Категорію не обрано</span>
                 <select id='category-select'>
                     <option value='null' disabled selected>оберіть категорію</option>
                 </select>
             </div>
 
-             <!-- регіон -->
+            <!-- регіон -->
             <div id="region-wrapper" class='wrapper'>
                 <span id="show-all-regions" class='show_all'>Регіон не обрано</span>
                 <select id='region-select'>
                     <option value='null' disabled selected>оберіть регіон</option>
                 </select>
-            </div>
+            </div>           
 
-           
+            <p class='credits'> Над проектом працювали: <br> <a href='https://texty.org.ua/author/oleksandr-oksymets/' target="_blank">Олександр Оксимець</a>,  <br><a href='https://texty.org.ua/author/vlad-herasymenko/' target="_blank">Владислав Герасименко</a> та <br> <a href='https://texty.org.ua/author/yevhenija-drozdova/' target="_blank">Євгенія Дроздова.</a></p>
+          
 
-           
+
+
 
             <!-- фільтр категорій -->
         </header>
-        
 
-        <div id='video-wrapper'>
-            <p class="no-video">Відео за обраними параметрами не знайдено.</p>
+        <div>
+            <h1 class='desktop-only'>Втрати російських військ в Україні. <span style="color: #333;">Хронологія</span></h1>
+            <div class='metodology'>
+                <h2 class='button'>Методологія</h2>          
+                <div class='methodology-wrapper hidden'>
+                   
+                <p>Тексти переглянули, зберегли та проаналізували сотні відео, що фіксують втрати російської техніки у війні проти України.</p>
+                <p> Датою відео ми вважаємо день, коли це відео з'явилося в публічному доступі. Ми усвідомлюємо, що  деякі записи можуть публікуватися із затримкою.</p>
+                <p>Ми розбили усі відео на кілька категорій. Наприклад, Ви можете відібрати лише записи з розбитими колонами російських військ або лише записи із застосуванням турецьких безпілотників «Байрактар» чи переносних зенітних ракетних комплексів (ПЗРК). Повний перелік категорій дивіться у спадному списку під календарем ліворуч.</p>
+                <p>Також є можливість переглянути відео за областями. На жаль, далеко не всі відео містять точну вказівку боїв.</p>
+                <p>Ми опрацювали такі телеграм-канали:</p>
+                <p>- Оперативний ЗСУ (<a href='https://t.me/operativnoZSU' target="_blank">https://t.me/operativnoZSU</a>)</p>
+                <p>- InformNapalm (<a href='https://t.me/informnapalm' target="_blank">https://t.me/informnapalm</a>)</p>
+                <p>- Conflict Intelligence Team (<a href='https://t.me/CITeam' target="_blank">https://t.me/CITeam</a>)</p>           
+                
+
+                <p class='mobile-only'> Над проектом працювали: <a href='https://texty.org.ua/author/oleksandr-oksymets/' target="_blank">Олександр Оксимець</a>,  <a href='https://texty.org.ua/author/vlad-herasymenko/' target="_blank">Владислав Герасименко</a> та <a href='https://texty.org.ua/author/yevhenija-drozdova/' target="_blank">Євгенія Дроздова.</a></p>
+            </div>
+            </div>
+            <div id='video-wrapper'>             
+                <p class="no-video">Відео за обраними параметрами не знайдено.</p>     
+            </div>
+           
         </div>
 
-        <img id='scroll-top' src='img/scroll-up.png'/>
+
+      
+
+
+        <img id='scroll-top' src='img/scroll-up.png' />
     </main>
 </body>
 

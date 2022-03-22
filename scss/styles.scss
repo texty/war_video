@@ -11,7 +11,8 @@ body {
 } 
 
 header {     
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
     position: sticky;
     top: 0;   
     background-color: #333;
@@ -27,16 +28,19 @@ header {
         margin: 10px auto 50px auto;      
         align-items: center;
     }
-
-    h1 {        
-        color: $red;
-        text-align: left;
-        font-size: 30px;
-        @media(max-width: 700px){
-            margin: 0;
-        }  
-    }
 }
+
+h1 {        
+    color: $red;
+    text-align: left;
+    font-size: 30px;
+    margin-left: 10px;
+    @media(max-width: 700px){
+        margin: 0;
+    }  
+}
+
+
 
 #socio-icons {
     display: flex;
@@ -161,4 +165,65 @@ select {
     bottom: 20px; 
     right: 20px; 
     cursor: pointer;
+}
+
+
+
+.metodology {
+    grid-column: 1/-1;
+    width: 90%;
+    margin-left:10px;
+
+    .button {
+        cursor: pointer;
+        width:max-content;
+        background-color: #ed6746a3;
+        color: white;
+        padding: 5px;
+    }
+
+    .button:hover {
+        background-color: #ed6746;
+    }
+
+    p {        
+        font-size:14px;        
+    }
+}
+
+.hidden{
+    height: 0;
+    overflow: hidden;
+}
+
+.mobile-only {
+    display: none;
+    @media(max-width: 700px){
+        display: block;
+    }
+}
+
+.desktop-only {
+    @media(max-width: 700px){
+        display: none;
+    }
+}
+
+.credits {
+    width: 90%;
+    margin: auto;
+    font-size:14px;
+    color: white;
+    line-height: 1.6;
+    @media(max-width: 700px){
+        display: none;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: $red;
+    }
 }
