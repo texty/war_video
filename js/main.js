@@ -96,7 +96,7 @@ function d3_jsonl(url) {
     }
 
 //load data
-d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl").then(function (video) {
+d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ new Date())).then(function (video) {
 
     const date_format = d3.timeFormat("%Y-%m-%d"); 
     var categories_list = [];
