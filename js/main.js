@@ -96,13 +96,16 @@ function d3_jsonl(url) {
     }
 
 //load data
-d3_jsonl(ROOT + "war_video_data/media.merged.jsonl").then(function (video) {
+d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl").then(function (video) {
 
     const date_format = d3.timeFormat("%Y-%m-%d"); 
     var categories_list = [];
     var region_list = [];
 
+    video = video.filter(function(d){ return d.attrs !== null});
+
     video.forEach(function (d) {
+        console.log(d);
         d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
         d.date = date_format(d.parced_date);
         
