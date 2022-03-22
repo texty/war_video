@@ -124,7 +124,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         }         
     });   
 
-    video = video.sort(function(a,b){ return a.parced_date  - b.parced_date});
+    video = video.sort(function(a,b){ return b.parced_date - a.parced_date});
 
     //додаємо області в select-dropdown
     d3.select('#category-select')
@@ -259,7 +259,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 .append('p')
                 .attr('class', 'tip')
                 .html(function (d) {
-                    return "<span>"+ d.source_title.replace('|','/').split('/')[0] + "</span> <br> <span>" + d.date + "/ "+ d.attrs.location +"</span>"
+                    return "<span>" + d.attrs.location.replace('Невідомо','Місце невідомо') + "<br>" + d.date + " / " + d.source_title.replace('|','/').split('/')[0] + "</span>"
                 })
 
             items
