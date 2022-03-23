@@ -94,6 +94,7 @@ main {
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
+  min-height: 80vh;
 }
 
 @media (max-width: 1200px) {
@@ -269,5 +270,111 @@ select {
 
 .credits a:hover {
   color: #ed6746;
+}
+
+/* read-more */
+#read-more-title {
+  text-align: center;
+}
+
+#read-more {
+  font-family: sans-serif;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+  #read-more {
+    display: block;
+  }
+}
+
+#read-more .rm {
+  text-decoration: none;
+  color: white;
+  width: 25%;
+  min-height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px auto;
+}
+
+@media (max-width: 700px) {
+  #read-more .rm {
+    width: 90%;
+  }
+}
+
+#read-more .rm h2 {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+#read-more #rm-1 {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/rm-1.png");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/rm-1.png");
+  background-size: cover;
+}
+
+#read-more #rm-2 {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/rm-2.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/rm-2.jpg");
+  background-size: cover;
+}
+
+#read-more #rm-3 {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/rm-3.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/rm-3.jpg");
+  background-size: cover;
+}
+
+/* donate */
+.donate-us {
+  font-family: sans-serif;
+  margin: 80px auto 30px auto;
+  max-width: 800px;
+}
+
+.donate-us hr {
+  grid-column: 1/-1;
+  margin: 20px 0;
+}
+
+.donate-us a.donate-button {
+  text-decoration: none;
+  cursor: pointer;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: auto;
+  min-height: 50px;
+  padding: 10px;
+  color: white;
+  background-color: #ed6746;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.donate-us a.donate-button p {
+  width: 100%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: auto !important;
+  font-weight: 600;
+}
+
+.donate-us a {
+  color: #ed6746;
+  border-bottom: 0;
 }
 /*# sourceMappingURL=styles.css.map */

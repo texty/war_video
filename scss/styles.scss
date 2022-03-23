@@ -78,6 +78,7 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);        
     grid-auto-flow: dense; 
+    min-height: 80vh;
     @media(max-width: 1200px){
         grid-template-columns: repeat(3, 1fr);        
     }
@@ -227,3 +228,92 @@ select {
         color: $red;
     }
 }
+/* read-more */
+
+#read-more-title {
+    text-align: center;
+  }
+  
+#read-more {
+    font-family: sans-serif;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    @media(max-width: 700px){
+      display: block;
+    }
+  
+    .rm {
+      text-decoration: none;
+      color: white;
+      width: 25%;
+      min-height: 200px;
+      display: flex;
+      margin: 10px auto;
+      @media(max-width: 700px){
+        width: 90%;
+      }       
+      
+      h2 {
+        width: 80%;
+        text-align: center;
+        margin: auto;
+      }
+    }
+  
+    #rm-1 {
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../img/rm-1.png");
+      background-size: cover;      
+    }
+  
+    #rm-2 {
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../img/rm-2.jpg");
+      background-size: cover;
+    }
+  
+    #rm-3 {
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../img/rm-3.jpg");
+      background-size: cover;
+    }  
+  }
+  
+  
+  /* donate */
+  .donate-us {
+    font-family: sans-serif;
+    margin: 80px auto 30px auto;
+    max-width: 800px;
+  
+    hr {
+      grid-column: 1/-1;
+      margin: 20px 0;
+    }
+  
+    a.donate-button {
+      text-decoration: none;
+      cursor: pointer;
+      width: max-content;
+      margin: auto;
+      min-height: 50px;
+      padding: 10px;
+      color: white;
+      background-color: $red;
+      display: flex;
+  
+      p {
+        width: 100%;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin: auto !important;
+        font-weight: 600;
+      }
+    }
+  
+    a {
+      color: $red;
+      border-bottom: 0;
+    }
+  }
+  
