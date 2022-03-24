@@ -259,7 +259,17 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 .append('p')
                 .attr('class', 'tip')
                 .html(function (d) {
-                    return "<span>" + d.attrs.location.replace('Невідомо','Місце невідомо') + "<br>" + d.date + " / " + d.source_title.replace('|','/').split('/')[0] + "</span>"
+                    var tg = d.source_title.replace('|','/').split('/')[0];
+
+                    if(d.attrs.location === "Невідомо" && d.attrs.region === "Невідомо"){
+                        var location = "Місце невідоме";
+                    } else if(d.attrs.location === "Невідомо" && d.attrs.region != "Невідомо"){
+                        var location = d.attrs.region + " обл.";
+                    } else {
+                        var location = d.attrs.location;
+                    }
+                    
+                    return "<span>"+ location + "<br>" + d.date + " / " + tg + "</span>"
                 })
 
             items
