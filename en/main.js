@@ -113,9 +113,10 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         if(d.attrs.category_en != undefined){
             //список унікальних категорій
             let categories = d.attrs.category_en.split(',');
-            for(i in categories){
+            
+            for(i in categories){               
                 let item = categories[i].trim();
-                if(!categories_list.includes(item)) {
+                if(!categories_list.includes(item)) {                    
                     categories_list.push(item)
                 }
             } 
@@ -242,7 +243,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
             let videoToShow = video
                 .filter(function(d){ return currentDate !== null ? d.date === currentDate : d;})
                 .filter(function(d){ return currentRegion !== null ? d.attrs.region_en === currentRegion : d;})
-                .filter(function(d){ return currentCategory !== null ? d.attrs.category_en.includes(currentCategory) : d;})
+                .filter(function(d){ return currentCategory !== null && d.attrs.category_en !== undefined ? d.attrs.category_en.includes(currentCategory) : d;})
            
      
             if(videoToShow.length === 0){
