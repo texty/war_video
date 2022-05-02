@@ -107,15 +107,23 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
     video.forEach(function (d) {
         d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
         d.date = date_format(d.parced_date);
+
+       
+
+        if(d.attrs.category_en != undefined){
+            //список унікальних категорій
+            let categories = d.attrs.category_en.split(',');
+            for(i in categories){
+                let item = categories[i].trim();
+                if(!categories_list.includes(item)) {
+                    categories_list.push(item)
+                }
+            } 
+         } else {
+            categories_list.push("Unknown")
+         }
         
-        //список унікальних категорій
-        let categories = d.attrs.category_en.split(',');
-        for(i in categories){
-            let item = categories[i].trim();
-            if(!categories_list.includes(item)) {
-                categories_list.push(item)
-            }
-        } 
+        
 
         //список унікальних областей
         let region = d.attrs.region_en;

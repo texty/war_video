@@ -70,8 +70,8 @@ main {
   width: 96%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 4fr;
-      grid-template-columns: 1fr 4fr;
+  -ms-grid-columns: 1.2fr 4fr;
+      grid-template-columns: 1.2fr 4fr;
   margin: 0 auto;
   padding: 0;
 }
@@ -97,7 +97,7 @@ main {
   min-height: 50vh;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   #video-wrapper {
     -ms-grid-columns: (1fr)[3];
         grid-template-columns: repeat(3, 1fr);
@@ -111,7 +111,7 @@ main {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   #video-wrapper {
     display: block;
   }
@@ -188,6 +188,17 @@ select {
   display: block;
   margin: 5px 0 50px;
   padding: 5px;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+option {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
 }
 
 .no-video {
