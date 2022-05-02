@@ -14,7 +14,7 @@ for(var i = 0; i < month.length; i++){
     month_data.push(month_list[month[i].getMonth()])
 }
 
-const width = 200,
+const width = 270,
     height = 136,
     cellSize = 14;
 
