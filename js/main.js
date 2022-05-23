@@ -1,5 +1,5 @@
 const ROOT = 'https://texty.org.ua/d/2022/'
-const month_list = ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'];
+const month_list = locale.month_list;
 const month = d3.timeMonths(new Date("2021-12-31"), new Date());
 var month_data = [];
 var currentDate = null;
@@ -98,6 +98,19 @@ function d3_jsonl(url) {
     });
 }
 
+function localize_video(d){
+    let locale_name = locale.__name;
+    let sfx = locale.__suffix;
+
+    let category = d.attrs['category' + sfx] || locale.unknown;
+    let region = d.attrs['region' + sfx];
+    let location = d.attrs['location' + sfx];
+
+    d.attrs.category = category;
+    d.attrs.region = region;
+    d.attrs.location = location;
+}
+
 //load data
 d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ new Date())).then(function (video) {
 
@@ -111,6 +124,8 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
         d.date = date_format(d.parced_date);
         
+        localize_video(d)
+
         //список унікальних категорій
         let categories = d.attrs.category.split(',');
         for(i in categories){
@@ -195,7 +210,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
 
         function region_select(region) {
             if (!region) {
-                d3.select('#show-all-regions').html('Регіон не обрано');
+                d3.select('#show-all-regions').html(locale.region_is_not_selected);
                 d3.select("#region-select").property('value', 'null');
                 currentRegion = null;
                 
@@ -205,7 +220,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 }
 
             } else {
-                d3.select('#show-all-regions').html('Прибрати фільтр &times;');
+                d3.select('#show-all-regions').html(locale.remove_filter);
                 d3.select("#region-select").property('value', region);
                 currentRegion = region;   
                 showAllRegions = false;          
@@ -215,7 +230,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
 
         function category_select(category) {
             if (!category) {
-                d3.select('#show-all-categories').html('Категорію не обрано');
+                d3.select('#show-all-categories').html(locale.category_is_not_selected);
                 d3.select("#category-select").property('value', 'null');
                 currentCategory = null;             
                 if (showAllCategories === false ){
@@ -226,7 +241,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 currentCategory = category; 
                 showAllCategories = false;
                 d3.select("#category-select").property('value', category);
-                d3.select('#show-all-categories').html('Прибрати фільтр &times; ')
+                d3.select('#show-all-categories').html(locale.remove_filter)
                 updateVideo();          
             }
         }
@@ -234,8 +249,8 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         function calendar_select_date(date){  
             if (!date) {                
                 d3.selectAll('.video-item').style("display", 'block');
-                d3.select('#selected-date').html('оберіть день:');
-                d3.select('#show_all_dates').html('Дату не обрано');
+                d3.select('#selected-date').html(locale.select_date);
+                d3.select('#show_all_dates').html(locale.date_is_not_selected);
                 d3.selectAll('.day').attr("stroke", "black"); 
                 currentDate = null;  
                 if(showAllDates === false){
@@ -252,7 +267,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                     .attr("stroke", "red").attr("stroke-width","2px").raise();
 
                 d3.select("#selected-date").text(date)
-                d3.select('#show_all_dates').html('Прибрати фільтр &times; ')
+                d3.select('#show_all_dates').html(locale.remove_filter)
             }
         }
         
@@ -290,9 +305,9 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                     var tg = d.source_title.replace('|','/').split('/')[0];
 
                     if(d.attrs.location === "Невідомо" && d.attrs.region === "Невідомо"){
-                        var location = "Місце невідоме";
+                        var location = locale.place_unknown;
                     } else if(d.attrs.location === "Невідомо" && d.attrs.region != "Невідомо"){
-                        var location = d.attrs.region + " обл.";
+                        var location = d.attrs.region + locale.region;
                     } else {
                         var location = d.attrs.location;
                     }
