@@ -171,7 +171,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
             d3.selectAll('.day').attr("stroke", "black")  
             d3.select(this).attr("stroke", "red").attr("stroke-width","2px").raise();
             d3.select("#selected-date").text(d)
-            d3.select('#show_all_video').html('Unselect &times; ')
+            d3.select('#show_all_dates').html('Unselect &times; ')
         })
         .attr('data-tippy-content', function(d){ return d })
         .attr("fill", function (d) { 
@@ -183,11 +183,11 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
             return el[0] ? color(el[0].values.length) : 'lightgrey'
         });   
 
-        d3.select('#show_all_video')
+        d3.select('#show_all_dates')
         .on('click', function(){                    
             d3.selectAll('.video-item').style("display", 'block');
             d3.select('#selected-date').html('Select a date:');
-            d3.select('#show_all_video').html("Date isn't selected");
+            d3.select('#show_all_dates').html("Date isn't selected");
             d3.selectAll('.day').attr("stroke", "black"); 
             currentDate = null;  
             if(showAllDates === false){

@@ -6,9 +6,12 @@ var currentDate = null;
 var currentCategory = null;
 var currentRegion = null;
 
-var showAllDates = true;
-var showAllCategories = true;
-var showAllRegions = true;
+readUrlParams();
+
+var showAllDates = currentDate === null;
+var showAllCategories = currentCategory === null;
+var showAllRegions = currentRegion === null;
+
 
 for(var i = 0; i < month.length; i++){
     month_data.push(month_list[month[i].getMonth()])
@@ -93,7 +96,7 @@ function d3_jsonl(url) {
     return d3.text(url).then(function (text) {
         return text.trim().split('\n').map(JSON.parse);
     });
-    }
+}
 
 //load data
 d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ new Date())).then(function (video) {
@@ -144,7 +147,10 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         .attr('value', function(d){ return d })
         .text(function(d){ return d });        
 
- 
+    
+    calendar_select_date(currentDate);
+    category_select(currentCategory);
+    region_select(currentRegion);
 
     
     // aggregated data for calendar picker    
@@ -155,15 +161,8 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
 
     //calendar: select the day    
     rect
-        .on('click', function(d){  
-            currentDate = d;
-            showAllDates = false;
-            updateVideo();
-            d3.selectAll('.day').attr("stroke", "black")  
-            d3.select(this).attr("stroke", "red").attr("stroke-width","2px").raise();
-            d3.select("#selected-date").text(d)
-            d3.select('#show_all_video').html('Прибрати фільтр &times; ')
-        })
+        .on('click', calendar_select_date)
+
         .attr('data-tippy-content', function(d){ return d })
         .attr("fill", function (d) { 
             let el = data.filter(function(t){ return t.key === d })
@@ -174,60 +173,89 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
             return el[0] ? color(el[0].values.length) : 'lightgrey'
         });   
 
-        d3.select('#show_all_video')
-        .on('click', function(){                    
-            d3.selectAll('.video-item').style("display", 'block');
-            d3.select('#selected-date').html('оберіть день:');
-            d3.select('#show_all_video').html('Дату не обрано');
-            d3.selectAll('.day').attr("stroke", "black"); 
-            currentDate = null;  
-            if(showAllDates === false){
-                showAshowAllDatesllCategories = true; 
-                updateVideo(); 
-            }             
-        })  
+        d3.select('#show_all_dates')
+            .on('click', calendar_select_date.bind(this, null))  
 
 
-        d3.select("#category-select").on("change", function(){
+        d3.select("#category-select").on("change", function() {
             let selected = d3.select(this).property("value");
-            currentCategory = selected; 
-            showAllCategories = false;
-            d3.select('#show-all-categories').html('Прибрати фільтр &times; ')
-            updateVideo();          
+            category_select(selected);
         });
 
-        d3.select("#show-all-categories").on("click", function(){
-            d3.select('#show-all-categories').html('Категорію не обрано');
-            d3.select("#category-select").property('value', 'null');
-            currentCategory = null;             
-            if(showAllCategories === false){
-                showAllCategories = true; 
-                updateVideo(); 
-            }
-        })
-
+        d3.select("#show-all-categories").on("click", category_select.bind(this, null))
 
         d3.select("#region-select").on("change", function(){
-            let selected = d3.select(this).property("value");   
-            d3.select('#show-all-regions').html('Прибрати фільтр &times;');
-            currentRegion = selected;   
-            showAllRegions = false;          
-            updateVideo();           
+            let selected = d3.select(this).property("value");
+            region_select(selected);   
         }); 
 
-        d3.select("#show-all-regions").on("click", function(){
-            d3.select('#show-all-regions').html('Регіон не обрано');
-            d3.select("#region-select").property('value', 'null');
-            currentRegion = null;
-            
-            if(showAllRegions === false){
-                showAllRegions = true; 
-                updateVideo(); 
-            }
-             
-        })
+        d3.select("#show-all-regions").on("click", region_select.bind(this, null));
 
         updateVideo();
+
+        function region_select(region) {
+            if (!region) {
+                d3.select('#show-all-regions').html('Регіон не обрано');
+                d3.select("#region-select").property('value', 'null');
+                currentRegion = null;
+                
+                if(showAllRegions === false){
+                    showAllRegions = true; 
+                    updateVideo(); 
+                }
+
+            } else {
+                d3.select('#show-all-regions').html('Прибрати фільтр &times;');
+                d3.select("#region-select").property('value', region);
+                currentRegion = region;   
+                showAllRegions = false;          
+                updateVideo();           
+            }
+        }
+
+        function category_select(category) {
+            if (!category) {
+                d3.select('#show-all-categories').html('Категорію не обрано');
+                d3.select("#category-select").property('value', 'null');
+                currentCategory = null;             
+                if (showAllCategories === false ){
+                    showAllCategories = true; 
+                    updateVideo(); 
+                }
+            } else {
+                currentCategory = category; 
+                showAllCategories = false;
+                d3.select("#category-select").property('value', category);
+                d3.select('#show-all-categories').html('Прибрати фільтр &times; ')
+                updateVideo();          
+            }
+        }
+
+        function calendar_select_date(date){  
+            if (!date) {                
+                d3.selectAll('.video-item').style("display", 'block');
+                d3.select('#selected-date').html('оберіть день:');
+                d3.select('#show_all_dates').html('Дату не обрано');
+                d3.selectAll('.day').attr("stroke", "black"); 
+                currentDate = null;  
+                if(showAllDates === false){
+                    showAshowAllDatesllCategories = true; 
+                    updateVideo(); 
+                }             
+            } else {
+                currentDate = date;
+                showAllDates = false;
+                updateVideo();
+                d3.selectAll('.day')
+                    .attr("stroke", "black")
+                    .filter(d => d === date)
+                    .attr("stroke", "red").attr("stroke-width","2px").raise();
+
+                d3.select("#selected-date").text(date)
+                d3.select('#show_all_dates').html('Прибрати фільтр &times; ')
+            }
+        }
+        
 
         //фільтруємо відео
         function updateVideo(){ 
@@ -280,7 +308,9 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 .append('source')
                 .attr('src', function (d) { return ROOT + d.file_path })
                 .attr('type', 'video/mp4')
-            }
+
+            updateUrlParams();
+        }
 
         d3.select("#scroll-top").on('click', function(){
             window.scrollTo(0, 0)
@@ -313,3 +343,42 @@ d3.select('.button').on("click", function(){
     .classed("hidden", !d3.select(".methodology-wrapper").classed("hidden"))
 })
 
+function constructUrlParams() {
+    let res = {};
+
+    if (currentDate) {
+        res.date = currentDate;
+    }
+
+    if (currentCategory) {
+        res.category = currentCategory;
+    }
+
+    if (currentRegion) {
+        res.region = currentRegion;
+    }
+
+    return res;
+}
+
+function updateUrlParams() {
+    const urlParams = new URLSearchParams("");
+    
+    let params = constructUrlParams();
+    
+    Object.keys(params).forEach(function(key) {
+        urlParams.set(key, params[key])
+    })
+
+    let qs = "?" + urlParams.toString();
+
+    window.history.replaceState(null, null, qs);
+}
+
+function readUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    currentDate = urlParams.get('date')
+    currentCategory = urlParams.get('category')
+    currentRegion = urlParams.get('region')
+}
