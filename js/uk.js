@@ -1,6 +1,6 @@
 const locale = {
     __name: "uk",
-    __suffix: "en",
+    __suffix: "",
 
     month_list: ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'],
     region_is_not_selected: 'Регіон не обрано',
