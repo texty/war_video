@@ -271,6 +271,18 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
             }
         }
         
+        function get_location_string(d) {
+
+            if (d.attrs.location && d.attrs.location !==locale.unknown) {
+                return d.attrs.location;
+            }
+            
+            if (d.attrs.region && d.attrs.region !== locale.unknown) {
+                return d.attrs.region + locale.obl;
+            }
+            
+            return locale.place_unknown;
+        }
 
         //фільтруємо відео
         function updateVideo(){ 
@@ -304,15 +316,9 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 .html(function (d) {
                     var tg = d.source_title.replace('|','/').split('/')[0];
 
-                    if(d.attrs.location === "Невідомо" && d.attrs.region === "Невідомо"){
-                        var location = locale.place_unknown;
-                    } else if(d.attrs.location === "Невідомо" && d.attrs.region != "Невідомо"){
-                        var location = d.attrs.region + locale.region;
-                    } else {
-                        var location = d.attrs.location;
-                    }
+                    var location_string = get_location_string(d)
                     
-                    return "<span>"+ location + "<br>" + d.date + " / " + tg + "</span>"
+                    return "<span>"+ location_string + "<br>" + d.date + " / " + tg + "</span>"
                 })
 
             items
