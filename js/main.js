@@ -13,6 +13,11 @@ var showAllCategories = currentCategory === null;
 var showAllRegions = currentRegion === null;
 
 
+const observer = lozad('.lozad', {
+    rootMargin: '500px 0px',
+});
+
+
 for(var i = 0; i < month.length; i++){
     month_data.push(month_list[month[i].getMonth()])
 }
@@ -322,13 +327,16 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
                 })
 
             items
-                .append("video")            
-                .attr("poster", function(d){ return ROOT + d.thumb1_path})
+                .append("video") 
+                .attr('class', 'lozad')           
+                .attr("data-poster", function(d){ return ROOT + d.thumb1_path})
                 .attr("preload", "none")
                 .attr('controls', "")
                 .append('source')
-                .attr('src', function (d) { return ROOT + d.file_path })
+                .attr('data-src', function (d) { return ROOT + d.file_path })
                 .attr('type', 'video/mp4')
+
+                observer.observe();
 
             updateUrlParams();
         }
@@ -336,6 +344,12 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
         d3.select("#scroll-top").on('click', function(){
             window.scrollTo(0, 0)
         })
+
+       
+       
+
+        
+        
         
         
         tippy('.day', {                 
