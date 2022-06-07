@@ -24,7 +24,7 @@ for(var i = 0; i < month.length; i++){
 
 const width = 320,
     height = 136,
-    cellSize = 14;
+    cellSize = 12;
 
 const color = d3.scaleQuantize()
     .domain([1, 25])

@@ -40,8 +40,6 @@ h1 {
     }  
 }
 
-
-
 #socio-icons {
     display: flex;
     justify-content: flex-start;
@@ -49,24 +47,22 @@ h1 {
 
 .icon-wrapper {
     margin-right: 10px;
+
 img {
     width: 30px;
 }
 }
 
-
 main {    
     width: 96%;
     display:grid;
-    grid-template-columns: 1.6fr 4fr;
+    grid-template-columns: 340px auto;
     margin:0 auto;
     padding: 0;  
     @media(max-width: 700px){
         display:block;
     }  
 }
-
-
 
 .tip {   
     color: $red;

@@ -70,8 +70,8 @@ main {
   width: 96%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1.2fr 4fr;
-      grid-template-columns: 1.2fr 4fr;
+  -ms-grid-columns: 340px auto;
+      grid-template-columns: 340px auto;
   margin: 0 auto;
   padding: 0;
 }
