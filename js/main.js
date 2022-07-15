@@ -127,7 +127,7 @@ d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ n
     video = video.filter(function(d){ return d.attrs !== null});
 
     video.forEach(function (d) {
-        d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date)
+        d.parced_date = d3.timeParse('%Y-%m-%dT%H:%M:%S+00:00')(d.video_date_altered)
         d.date = date_format(d.parced_date);
         
         localize_video(d)
