@@ -1,6 +1,7 @@
 const ROOT = 'https://texty.org.ua/d/2022/'
 const month_list = locale.month_list;
 const month = d3.timeMonths(new Date("2021-12-31"), new Date());
+console.log(month)
 var month_data = [];
 var currentDate = null;
 var currentCategory = null;
@@ -22,7 +23,7 @@ for(var i = 0; i < month.length; i++){
     month_data.push(month_list[month[i].getMonth()])
 }
 
-const width = 320,
+const width = 60 * (month.length-1),
     height = 136,
     cellSize = 12;
 
@@ -39,7 +40,7 @@ var svg = d3.select("#day-select")
 
 var svg_g = svg    
     .append("g")
-    .attr("transform", "translate(" + '-60' + "," + 10 + ")");
+    .attr("transform", "translate(" + '-60' + "," + 0 + ")");
 
  svg_g.append("text")
     .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
@@ -81,7 +82,7 @@ svg_g.append("g")
     
 var legend = svg
     .append("g")    
-    .attr("transform", "translate(" + '-60' + "," + 10 + ")")    
+    .attr("transform", "translate(" + '-55' + "," + -10 + ")")    
     .selectAll(".legend")
     .data(month_data)
     .enter()
