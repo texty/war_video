@@ -1,4 +1,4 @@
-const ROOT = 'https://texty.org.ua/d/2022/'
+const ROOT = 'https://thallium.texty.org.ua/funk/'
 const month_list = locale.month_list;
 const month = d3.timeMonths(new Date("2021-12-31"), new Date());
 console.log(month)
@@ -118,7 +118,7 @@ function localize_video(d){
 }
 
 //load data
-d3_jsonl("https://texty.org.ua/d/2022/war_video_data/media.merged.jsonl?" + (+ new Date())).then(function (video) {
+d3_jsonl("https://thallium.texty.org.ua/funk/war_video_data/media.merged.jsonl?" + (+ new Date())).then(function (video) {
 
     const date_format = d3.timeFormat("%Y-%m-%d"); 
     var categories_list = [];
